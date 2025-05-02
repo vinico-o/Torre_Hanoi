@@ -1,4 +1,6 @@
 #include "Torre_Hanoi.h"
+#include <stdio.h>
+#include <stdlib.h>
 #include <stdbool.h>
 
 void InicializarPilha(Pilha *pilha)
@@ -15,4 +17,13 @@ bool Vazia(Pilha *pilha)
     }
 
     return false;
+}
+
+void Imprimir(Pilha *pilha)
+{
+    for(No* ptr = pilha->topo; ptr != NULL; ptr = ptr->prox)
+    {
+        printf("%d", ptr->elemento);
+        printf("\n");
+    }
 }
