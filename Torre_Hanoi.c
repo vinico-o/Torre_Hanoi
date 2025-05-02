@@ -27,3 +27,37 @@ void Imprimir(Pilha *pilha)
         printf("\n");
     }
 }
+
+void Empilhar (Pilha *pilha, Cores disco)
+{
+    No* novo = malloc(sizeof(No));
+    if(novo == NULL)
+    {
+        printf("Erro ao alocar na memoria!\n");
+        return;
+    }
+
+    if(Vazia(pilha))
+    {
+        novo->elemento = disco;
+        novo->prox = NULL;
+        pilha->topo = novo;
+        pilha->qntd++;
+    }
+    else
+    {
+        if(disco > pilha->topo->elemento)
+        {
+            printf("Nao e possivel colocar um disco maior que o do topo!\n");
+            return;
+        }
+        else
+        {
+            novo->elemento = disco;
+            novo->prox = NULL;
+            pilha->qntd++;
+            pilha->topo->prox = novo;
+            pilha->topo = novo;
+        }
+    }
+}
