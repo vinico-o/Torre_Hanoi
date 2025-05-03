@@ -23,9 +23,11 @@ void Imprimir(Pilha *pilha)
 {
     for(No* ptr = pilha->topo; ptr != NULL; ptr = ptr->prox)
     {
-        printf("%d", ptr->elemento);
+        printf("%d", ptr->cor);
         printf("\n");
     }
+
+    printf("\n");
 }
 
 void Empilhar (Pilha *pilha, Cores disco)
@@ -37,27 +39,36 @@ void Empilhar (Pilha *pilha, Cores disco)
         return;
     }
 
+    if(!Vazia(pilha) && disco > pilha->topo->cor)
+    {
+        printf("Nao e possivel colocar um disco maior que o do topo!\n");
+        free(novo);
+        return;
+    }
+    
+    novo->cor = disco;
+    novo->prox = pilha->topo;
+    pilha->qntd++;
+    pilha->topo = novo;   
+    
+}
+
+void Desempilhar(Pilha *pilha, Cores* cor)
+{
+    No* temp;
+    temp = pilha->topo;
+
     if(Vazia(pilha))
     {
-        novo->elemento = disco;
-        novo->prox = NULL;
-        pilha->topo = novo;
-        pilha->qntd++;
+        printf("Impossivel de desempilhar pilha Vazia!\n");
+        return;
     }
-    else
-    {
-        if(disco > pilha->topo->elemento)
-        {
-            printf("Nao e possivel colocar um disco maior que o do topo!\n");
-            return;
-        }
-        else
-        {
-            novo->elemento = disco;
-            novo->prox = NULL;
-            pilha->qntd++;
-            pilha->topo->prox = novo;
-            pilha->topo = novo;
-        }
-    }
+
+    *cor = pilha->topo->cor;
+    pilha->topo = pilha->topo->prox;
+    temp->prox = NULL;
+    free(temp);
+    pilha->qntd--;
+
+    return;
 }
