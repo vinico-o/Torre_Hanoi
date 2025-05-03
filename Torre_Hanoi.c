@@ -72,3 +72,10 @@ void Desempilhar(Pilha *pilha, Cores* cor)
 
     return;
 }
+
+void TrocarPinos (Pilha* origem, Pilha* destino)
+{
+    Cores cor;
+    Desempilhar(origem, &cor);
+    Empilhar(destino, cor);
+}
