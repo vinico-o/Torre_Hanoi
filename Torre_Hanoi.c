@@ -21,9 +21,34 @@ bool Vazia(Pilha *pilha)
 
 void Imprimir(Pilha *pilha)
 {
+    if(Vazia(pilha))
+    {
+        printf("Vazia");
+    }
+    
     for(No* ptr = pilha->topo; ptr != NULL; ptr = ptr->prox)
     {
-        printf("%d", ptr->cor);
+        printf("%d ", ptr->cor);
+    }
+}
+
+void ImprimirTorre(Pilha* origem, Pilha* auxiliar, Pilha* destino)
+{
+    for(int i = 0; i < 7; i++)
+    {
+        printf("| ");
+        switch (i)
+        {
+            case 1:
+                Imprimir(origem);
+                break;
+            case 3:
+                Imprimir(auxiliar);
+                break;
+            case 5:
+                Imprimir(destino);
+                break;
+        }
         printf("\n");
     }
 
