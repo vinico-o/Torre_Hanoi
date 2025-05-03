@@ -38,13 +38,6 @@ void Empilhar (Pilha *pilha, Cores disco)
         printf("Erro ao alocar na memoria!\n");
         return;
     }
-
-    if(!Vazia(pilha) && disco > pilha->topo->cor)
-    {
-        printf("Nao e possivel colocar um disco maior que o do topo!\n");
-        free(novo);
-        return;
-    }
     
     novo->cor = disco;
     novo->prox = pilha->topo;
@@ -77,5 +70,11 @@ void TrocarPinos (Pilha* origem, Pilha* destino)
 {
     Cores cor;
     Desempilhar(origem, &cor);
+    if(!Vazia(destino) && cor > destino->topo->cor)
+    {
+        Empilhar(origem, cor);
+        printf("Nao e possivel colocar um disco maior que o do topo!\n");
+        return;
+    }
     Empilhar(destino, cor);
 }
